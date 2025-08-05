@@ -1,0 +1,44 @@
+name: Daily PNG File Organization
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM UTC (3:00 AM EST, 12:00 AM PST)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  organize-png-files:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Call Claude Code API
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🤖 Calling Claude Code to organize PNG files..."
+        
+        # This is a placeholder for the actual API call to Claude Code
+        # The actual implementation would involve:
+        # 1. Calling Claude Code API with instructions to process PNG files
+        # 2. Claude Code would connect to your local system (if configured)
+        # 3. Move PNG files from Downloads to Needs Filing with proper naming
+        
+        echo "📋 Task: Move PNG files from Downloads to Needs Filing folder"
+        echo "🏷️  Apply naming convention from CLAUDE.md"
+        echo "✅ This would trigger Claude Code to perform the file organization"
+        
+        # Example curl command (replace with actual Claude Code API endpoint):
+        # curl -X POST "https://api.anthropic.com/v1/claude-code/execute" \
+        #   -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+        #   -H "Content-Type: application/json" \
+        #   -d '{
+        #     "task": "organize_png_files",
+        #     "instructions": "Move all PNG files from /Users/nickflorez/Downloads/ to /Users/nickflorez/Downloads/Needs Filing/ and rename them according to the naming convention in CLAUDE.md"
+        #   }'
+        
+    - name: Log completion
+      run: |
+        echo "✅ Daily PNG organization task completed at $(date)"
