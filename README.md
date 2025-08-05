@@ -1,30 +1,58 @@
 # AI Assistant Onboarding Repository
 
-This repository contains GitHub Actions workflows that trigger automated tasks using Claude Code as an AI assistant.
+This repository contains automated tasks using Claude Code as an AI assistant for file organization and management.
 
-## Current Workflows
+## Solutions Available
 
-### Daily PNG File Organization
+### 1. GitHub Actions (Cloud-based logging)
 - **File**: `.github/workflows/daily-png-filing.yml`
 - **Trigger**: Daily at 8:00 AM UTC
-- **Purpose**: Automatically organize PNG files from Downloads folder to Needs Filing folder with proper naming convention
+- **Purpose**: Logs the intended PNG organization task (placeholder implementation)
 
-## Setup Instructions
+### 2. Local macOS Automation (Recommended)
+- **Files**: `claude-png-organizer.sh`, `com.nickflorez.png-organizer.plist`
+- **Trigger**: Daily at 8:00 AM local time
+- **Purpose**: Actually moves and renames PNG files using Claude Code CLI
 
-1. **Add Anthropic API Key**: 
-   - Go to repository Settings → Secrets and variables → Actions
-   - Add a new secret named `ANTHROPIC_API_KEY` with your Anthropic API key
+## Quick Setup (Local Automation)
 
-2. **Configure Claude Code**: 
-   - Ensure Claude Code is configured to accept API calls
-   - Verify local system access permissions
+1. **Install the local automation**:
+   ```bash
+   ./setup-local-automation.sh
+   ```
 
-## File Naming Convention
+2. **Test immediately**:
+   ```bash
+   ./claude-png-organizer.sh
+   ```
 
-PNG files are renamed according to the convention specified in CLAUDE.md:
-- Format: `[PROVIDER] | [TYPE/PURPOSE] | [YYYY-MM-DD].png`
-- Files are moved from `Downloads/` to `Downloads/Needs Filing/`
+## How It Works
 
-## Manual Triggering
+The local automation:
+1. Uses macOS LaunchAgent to trigger daily at 8:00 AM
+2. Calls Claude Code CLI with file organization instructions
+3. Claude Code reads your CLAUDE.md instructions and applies document filing rules
+4. PNG files are moved from `Downloads/` to `Downloads/Needs Filing/`
+5. Files are renamed using the convention: `[PROVIDER] | [TYPE/PURPOSE] | [YYYY-MM-DD].png`
 
-All workflows can be triggered manually via the GitHub Actions tab using the "workflow_dispatch" trigger.
+## Files Included
+
+- `claude-png-organizer.sh` - Main script that calls Claude Code
+- `local-png-organizer.py` - Simple Python fallback (no AI)
+- `com.nickflorez.png-organizer.plist` - macOS LaunchAgent configuration
+- `setup-local-automation.sh` - Installation script
+- `.github/workflows/daily-png-filing.yml` - GitHub Action (demonstration)
+
+## Logs
+
+- Standard output: `png-organizer.log`
+- Error output: `png-organizer-error.log`
+
+## Manual Control
+
+- **Test now**: `./claude-png-organizer.sh`
+- **Uninstall**: 
+  ```bash
+  launchctl unload ~/Library/LaunchAgents/com.nickflorez.png-organizer.plist
+  rm ~/Library/LaunchAgents/com.nickflorez.png-organizer.plist
+  ```
