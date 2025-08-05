@@ -4,7 +4,7 @@
 echo "🤖 Starting Claude Code PNG organization..."
 
 # Set the task for Claude Code
-TASK="File documents: Move all PNG files from /Users/nickflorez/Downloads/ to /Users/nickflorez/Downloads/Needs Filing/ and rename them according to the naming convention in your CLAUDE.md instructions. Apply the document filing rules from your instructions."
+TASK="File documents: Look at all PNG files in /Users/nickflorez/Downloads/ and read the content of each screenshot. Rename them with descriptive names that reflect what's actually shown in the image, using format 'Screenshot | [DESCRIPTIVE_CONTENT] | [YYYY-MM-DD].png'. Then move them to /Users/nickflorez/Downloads/Needs Filing/. Apply the document filing rules from your CLAUDE.md instructions."
 
 # Call Claude Code with the task
 echo "📋 Calling Claude Code with task: $TASK"
